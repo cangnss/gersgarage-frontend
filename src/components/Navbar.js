@@ -3,7 +3,7 @@ import logo from "../images/repaircar.png"
 
 export default function Navbar(){
     return(
-        <div className="w-full flex flex-row justify-around items-center">
+        <div className="w-full flex flex-row justify-around items-center border-b-2 border-blue-600">
             <div>
                 <img src={logo} alt="repair" width="150" />
             </div>

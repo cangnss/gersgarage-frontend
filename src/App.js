@@ -6,7 +6,7 @@ import Signup from './components/Auth/Signup';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App flex flex-col">
       <Navbar />
       <Routes>
         <Route path="/auth/login" element={<Login />}/>
