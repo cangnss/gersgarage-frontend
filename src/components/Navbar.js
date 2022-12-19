@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../images/repaircar.png"
 
 export default function Navbar(){
@@ -14,10 +15,14 @@ export default function Navbar(){
             </div>
             <div className="flex flex-row mt-1">
                 <div className="w-full">
-                    <button className="p-1 w-24 mr-2 font-semibold text-white bg-blue-600 border-2 border-blue-600 rounded-lg">Login</button>
+                    <Link to="/auth/login">
+                        <button className="p-1 w-24 mr-2 font-semibold text-white bg-blue-600 border-2 border-blue-600 rounded-lg">Login</button>
+                    </Link>
                 </div>
                 <div className="">
-                    <button className="p-1 w-24 font-semibold text-black bg-white rounded-lg border-2 border-blue-600">Register</button>
+                    <Link to="/auth/signup">
+                        <button className="p-1 w-24 font-semibold text-black bg-white rounded-lg border-2 border-blue-600">Register</button>
+                    </Link>
                 </div>
             </div>
         </div>
