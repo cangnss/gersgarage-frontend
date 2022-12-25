@@ -11,6 +11,9 @@ export default function Navbar(){
                 <ul className="flex flex-row">
                     <li className="font-semibold mr-2 hover:text-gray-50">Home</li>
                     <li className="font-semibold mr-2 hover:text-gray-50">About</li>
+                    <Link to="/contact">
+                        <li className="font-semibold mr-2 hover:text-gray-50">Contact</li>
+                    </Link>
                 </ul>
             </div>
             <div className="flex flex-row mt-1">
