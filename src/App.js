@@ -7,7 +7,9 @@ import Contact from './components/Contact/Contact';
 import Footer from './layouts/Footer/Footer';
 import Admin from './components/Admin/Admin';
 import AdminLayout from './components/Admin/AdminLayout';
-import AddEmployee from './components/Admin/AddEmployee';
+import AddEmployee from './components/Admin/Employee/AddEmployee';
+import EmployeeLayout from './components/Admin/Employee/EmployeeLayout';
+import Employee from './components/Admin/Employee/Employee';
 
 function App() {
   return (
@@ -19,7 +21,10 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route index={true} element={<Admin />} />
-          <Route path="/admin/addemployee" element={<AddEmployee />} /> 
+          <Route path="/admin/employee" element={<EmployeeLayout />}>
+            <Route index={true} element={<Employee />} />
+            <Route path="/admin/employee/adddemployee" element={<AddEmployee />} />
+          </Route> 
         </Route>
       </Routes>
       <Footer />
