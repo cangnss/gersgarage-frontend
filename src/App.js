@@ -11,6 +11,8 @@ import AddEmployee from './components/Admin/Employee/AddEmployee';
 import EmployeeLayout from './components/Admin/Employee/EmployeeLayout';
 import Employee from './components/Admin/Employee/Employee';
 import UpdateEmployee from './components/Admin/Employee/UpdateEmployee';
+import ServicesLayout from './components/Admin/Services/ServicesLayout';
+import Services from './components/Admin/Services/Services';
 
 function App() {
   return (
@@ -27,6 +29,9 @@ function App() {
             <Route path="/admin/employee/adddemployee" element={<AddEmployee />} />
             <Route path="/admin/employee/:id" element={<UpdateEmployee />} />
           </Route> 
+          <Route path="/admin/services" element={<ServicesLayout />}>
+            <Route index={true} element={<Services />} />
+          </Route>
         </Route>
       </Routes>
       <Footer />

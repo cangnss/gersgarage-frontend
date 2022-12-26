@@ -1,5 +1,5 @@
 import { AiOutlineUserAdd } from "react-icons/ai";
-import { GrUserWorker } from "react-icons/gr";
+import { GrServices, GrUserWorker } from "react-icons/gr";
 import { Link } from "react-router-dom";
 
 export default function Admin() {
@@ -17,14 +17,16 @@ export default function Admin() {
               </div>
             </div>
           </Link>
-          <div className="flex flex-col text-center my-10 mx-10 rounded-lg border-2 border-blue-600">
-            <div className="mt-5 text-center mx-auto ">
-              <AiOutlineUserAdd className="text-2xl" />
+          <Link to="/admin/services">
+            <div className="flex flex-col text-center my-10 mx-10 rounded-lg border-2 border-blue-600">
+              <div className="mt-5 text-center mx-auto ">
+                <GrServices className="text-2xl" />
+              </div>
+              <div className="p-5">
+                <p className="font-semibold">Services</p>
+              </div>
             </div>
-            <div className="p-5">
-              <p className="font-semibold">Add Employee</p>
-            </div>
-          </div>
+          </Link>
           <div className="flex flex-col text-center my-10 mx-10 rounded-lg border-2 border-blue-600">
             <div className="mt-5 text-center mx-auto ">
               <AiOutlineUserAdd className="text-2xl" />
