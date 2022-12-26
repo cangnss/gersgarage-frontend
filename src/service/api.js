@@ -1,13 +1,9 @@
-import axios from "axios"
+import axios from 'axios';
 
-export const getEmployees = async () => {
-    const employees = await axios.get("http://localhost:8080/employees")
-    if (employees == null) {
-        return {
-            status: 400,
-            message: "No employees"
-        }   
-    }else{
-        return employees
-    }
-}
+const api = axios.create({
+  baseURL: 'http://localhost:8080',
+});
+
+export const getEmployeeData = () => api.get('/employees');
+export const postEmployeeData = (data) => api.post('/employees', data);
+export const getEmployee = (id) => api.get(`/employees/${id}`);
