@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getEmployeeData } from "../../../service/api";
+import { deleteEmployeeData, getEmployeeData } from "../../../service/api";
 import { Link } from "react-router-dom";
 
 export default function Employee() {
@@ -15,6 +15,17 @@ export default function Employee() {
         console.error(error);
       });
   }, []);
+
+  const handleDelete = (id) => {
+    deleteEmployeeData(id)
+          .then((res)=>{
+            console.log(res.data);
+            setEmployees(employees.filter((e)=> e.id !== id))
+          })
+          .catch((err)=>{
+            console.error(err);
+          })
+  };
 
   console.log(employees);
   return (
@@ -56,7 +67,7 @@ export default function Employee() {
                   <tbody>
                     {employees?.map((employee) => {
                       return (
-                        <tr class="border-b">
+                        <tr class="border-b" key={employee.id}>
                           <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             {++i}
                           </td>
@@ -71,8 +82,20 @@ export default function Employee() {
                           </td>
                           <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                             <Link to={`/admin/employee/${employee.id}`}>
-                              <button className="p-2 border-2 bg-sky-500 text-white font-semibold rounded-lg border-sky-500">Update Employee</button>
+                              <button className="p-2 border-2 bg-sky-500 text-white font-semibold rounded-lg border-sky-500">
+                                Update Employee
+                              </button>
                             </Link>
+                          </td>
+                          <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <button
+                              className="p-2 border-2 bg-red-600 text-white font-semibold rounded-lg border-red-600"
+                              onClick={() => {
+                                handleDelete(employee.id);
+                              }}
+                            >
+                              Delete Employee
+                            </button>
                           </td>
                         </tr>
                       );

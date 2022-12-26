@@ -1,7 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getEmployee } from "../../../service/api";
+import { useNavigate, useParams } from "react-router-dom";
+import { getEmployee, putEmployeeData } from "../../../service/api";
 
 export default function UpdateEmployee() {
   const [formData, setFormData] = useState({
@@ -19,7 +18,7 @@ export default function UpdateEmployee() {
         setFormData({
           firstname: res?.data?.firstname,
           lastname: res?.data?.lastname,
-          salary: res?.data?.salary,
+          salary: parseFloat(res?.data?.salary),
         });
       })
       .catch((err) => {
@@ -29,12 +28,18 @@ export default function UpdateEmployee() {
   console.log(formData);
 
   const handleChange = (event) => {
-    const { firstname, value} = event.target;
-    setFormData({ ...formData, [firstname] : value});
-    console.log("firstname:", firstname, "value:", value);
-  }
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
   const updateHandler = (e) => {
     e.preventDefault();
+    putEmployeeData(parseInt(id), formData)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     console.log(
       "firstname:",
       formData.firstname,
@@ -66,7 +71,7 @@ export default function UpdateEmployee() {
                   type="text"
                   className="w-48 h-10 border-2 border-slate-200 rounded-lg"
                   name="firstname"
-                  value={formData?.firstname || ''}
+                  defaultValue={formData?.firstname || ""}
                   onChange={handleChange}
                 />
               </div>
@@ -75,7 +80,7 @@ export default function UpdateEmployee() {
                   type="text"
                   className="w-48 h-10 border-2 border-slate-200 rounded-lg"
                   name="lastname"
-                  value={formData?.lastname || ''}
+                  defaultValue={formData?.lastname || ""}
                   onChange={handleChange}
                 />
               </div>
@@ -84,7 +89,7 @@ export default function UpdateEmployee() {
                   type="text"
                   className="w-48 h-10 border-2 border-slate-200 rounded-lg"
                   name="salary"
-                  value={formData?.salary || ''}
+                  defaultValue={formData?.salary || ""}
                   onChange={handleChange}
                 />
               </div>

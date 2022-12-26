@@ -8,7 +8,7 @@ export default function EmployeeLayout(){
                     <p className="font-semibold text-2xl">Employee Dashboard</p>
                 </div>
                 <div className="mr-10 mb-1">
-                    <Link to="/admin/addemployee">
+                    <Link to="/admin/employee/adddemployee">
                         <button className="p-2 border-2 bg-blue-600 text-white font-semibold rounded-lg border-blue-600">Add Employee</button>
                     </Link>
                 </div>

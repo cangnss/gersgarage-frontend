@@ -5,5 +5,9 @@ const api = axios.create({
 });
 
 export const getEmployeeData = () => api.get('/employees');
-export const postEmployeeData = (data) => api.post('/employees', data);
 export const getEmployee = (id) => api.get(`/employees/${id}`);
+export const postEmployeeData = (data) => api.post('/employees', data);
+export const putEmployeeData = (id, data) => api.put(`/employees/${id}`, data);
+export const deleteEmployeeData = (id) => api.delete(`/employees/${id}`);
+export const getPlaceServiceData = () => api.get('/services');
+export const deletePlaceServiceData = (id) => api.delete(`/services/${id}`);
