@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   deletePlaceServiceData,
-  getPlaceServiceData,
+  getPlaceServicesData,
 } from "../../../service/api";
 import { Link } from "react-router-dom";
 
@@ -9,7 +9,7 @@ export default function Services() {
   let i = 0;
   const [services, setServices] = useState();
   useEffect(() => {
-    getPlaceServiceData()
+    getPlaceServicesData()
       .then((res) => {
         console.log(res.data);
         setServices(res.data);
@@ -49,7 +49,7 @@ export default function Services() {
                         scope="col"
                         class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
                       >
-                        Firstname
+                        Type
                       </th>
                       <th
                         scope="col"
@@ -61,7 +61,7 @@ export default function Services() {
                         scope="col"
                         class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
                       >
-                        Salary
+                        Price
                       </th>
                     </tr>
                   </thead>
@@ -79,7 +79,7 @@ export default function Services() {
                             {service.price}
                           </td>
                           <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            <Link to={`/admin/service/${service.id}`}>
+                            <Link to={`/admin/services/${service.id}`}>
                               <button className="p-2 border-2 bg-sky-500 text-white font-semibold rounded-lg border-sky-500">
                                 Update Service
                               </button>

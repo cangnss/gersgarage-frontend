@@ -1,8 +1,28 @@
-import { useState } from "react";
-import { postPlaceServiceData } from "../../../service/api";
+import { useEffect, useState } from "react";
+import {
+  getPlaceServiceData,
+  postPlaceServiceData,
+  putEmployeeData,
+  putPlaceServiceData,
+} from "../../../service/api";
+import { useParams } from "react-router-dom";
 
-export default function AddService() {
-  const [formData, setFormData] = useState({});
+export default function UpdateService() {
+  const params = useParams();
+  const id = params?.id;
+  const [formData, setFormData] = useState({
+    type: "",
+    price: 0,
+  });
+
+  useEffect(() => {
+    getPlaceServiceData(id).then((res) => {
+      setFormData({
+        type: res?.data?.type,
+        price: res?.data?.price,
+      });
+    });
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -11,7 +31,7 @@ export default function AddService() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    postPlaceServiceData(formData)
+    putPlaceServiceData(id, formData)
       .then((response) => {
         console.log(response.data);
       })
@@ -52,13 +72,21 @@ export default function AddService() {
                   defaultValue={formData?.price || ""}
                   onChange={handleChange}
                 />
-                <input type="hidden" name="placeId" defaultValue={formData?.placeId || 1} value="1" />
+                <input
+                  type="hidden"
+                  name="placeId"
+                  defaultValue={formData?.placeId || 1}
+                  value="1"
+                />
               </div>
             </div>
           </div>
           <div className="flex justify-end">
-            <button type="submit" className="w-32 p-1 rounded-lg border-2 border-blue-600 bg-blue-600 text-white font-semibold">
-              Add Service
+            <button
+              type="submit"
+              className="w-32 p-1 rounded-lg border-2 border-blue-600 bg-blue-600 text-white font-semibold"
+            >
+              Update Service
             </button>
           </div>
         </form>
