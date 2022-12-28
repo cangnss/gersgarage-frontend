@@ -22,7 +22,7 @@ function App() {
   return (
     <div className="App flex flex-col">
       <Navbar />
-      {/* <Carousel /> */}
+      <Carousel />
       <ServiceTypes />
       <Routes>
         <Route path="/auth/login" element={<Login />}/>

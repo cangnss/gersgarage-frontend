@@ -1,107 +1,62 @@
 import React, { useState } from "react";
+import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import service1 from "../../images/service1.jpg";
 import service2 from "../../images/service2.jpeg";
 import service3 from "../../images/service3.jpg";
+import service4 from "../../images/service4.jpg";
+import service5 from "../../images/service5.jpg";
+import service6 from "../../images/service6.jpeg";
+
 
 const Carousel = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [
+    {
+      image: <img src={service4} width="1200" className="rounded-lg" />,
+    },
+    {
+      image: <img src={service5} width="1200" className="rounded-lg h-128 bg-cover" />,
+    },
+    {
+      image: <img src={service6} width="1200" className="rounded-lg h-128 bg-cover" />,
+    },
+  ];
+
+  const handlePrevClick = () => {
+    setCurrentSlide((currentSlide - 1 + slides.length) % slides.length);
+  };
+
+  const handleNextClick = () => {
+    setCurrentSlide((currentSlide + 1) % slides.length);
+  };
+
   return (
-    <div id="default-carousel" class="relative" data-carousel="static">
-      <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <span class="absolute text-2xl font-semibold text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 sm:text-3xl dark:text-gray-800">
-            First Slide
-          </span>
-          <img
-            src={service1}
-            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-            alt="..."
-          />
-        </div>
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img
-            src={service2}
-            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-            alt="..."
-          />
-        </div>
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img
-            src={service3}
-            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-            alt="..."
-          />
-        </div>
-      </div>
-      <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-        <button
-          type="button"
-          class="w-3 h-3 rounded-full"
-          aria-current="false"
-          aria-label="Slide 1"
-          data-carousel-slide-to="0"
-        ></button>
-        <button
-          type="button"
-          class="w-3 h-3 rounded-full"
-          aria-current="false"
-          aria-label="Slide 2"
-          data-carousel-slide-to="1"
-        ></button>
-        <button
-          type="button"
-          class="w-3 h-3 rounded-full"
-          aria-current="false"
-          aria-label="Slide 3"
-          data-carousel-slide-to="2"
-        ></button>
-      </div>
-      <button
-        type="button"
-        class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-        data-carousel-prev
-      >
-        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-          <svg
-            aria-hidden="true"
-            class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
+    <div className="relative overflow-hidden">
+      {slides.map((slide, index) => {
+        return (
+          <div
+            className={index === currentSlide ? "slide active" : "slide"}
+            key={index}
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 19l-7-7 7-7"
-            ></path>
-          </svg>
-          <span class="sr-only">Previous</span>
-        </span>
+            {index === currentSlide && (
+              <div className="my-10 flex justify-center">
+                {slide.image}
+              </div>
+            )}
+          </div>
+        );
+      })}
+      <button
+        className="absolute top-96 left-0 rounded-full p-2 bg-white text-gray-700 hover:text-gray-800"
+        onClick={handlePrevClick}
+      >
+        <AiFillCaretLeft className="text-4xl" />
       </button>
       <button
-        type="button"
-        class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-        data-carousel-next
+        className="absolute top-96 right-0 rounded-full p-2 bg-white text-gray-700 hover:text-gray-800"
+        onClick={handleNextClick}
       >
-        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-          <svg
-            aria-hidden="true"
-            class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 5l7 7-7 7"
-            ></path>
-          </svg>
-          <span class="sr-only">Next</span>
-        </span>
+        <AiFillCaretRight className="text-4xl" />
       </button>
     </div>
   );
