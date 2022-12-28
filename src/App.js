@@ -15,11 +15,15 @@ import ServicesLayout from './components/Admin/Services/ServicesLayout';
 import Services from './components/Admin/Services/Services';
 import AddService from './components/Admin/Services/AddService';
 import UpdateService from './components/Admin/Services/UpdateService';
+import Carousel from './layouts/Carousel/Carousel';
+import ServiceTypes from './layouts/ServiceTypes/ServiceTypes';
 
 function App() {
   return (
     <div className="App flex flex-col">
       <Navbar />
+      {/* <Carousel /> */}
+      <ServiceTypes />
       <Routes>
         <Route path="/auth/login" element={<Login />}/>
         <Route path="/auth/signup" element={<Signup />}/>
