@@ -17,6 +17,10 @@ import AddService from './components/Admin/Services/AddService';
 import UpdateService from './components/Admin/Services/UpdateService';
 import Carousel from './layouts/Carousel/Carousel';
 import ServiceTypes from './layouts/ServiceTypes/ServiceTypes';
+import UserLayout from './components/User/UserLayout';
+import UserDashboard from './components/User/UserDashboard';
+import ServiceRequest from './components/User/ServiceRequest';
+import Repairs from './components/User/Repairs';
 
 function App() {
   return (
@@ -40,6 +44,11 @@ function App() {
             <Route path='/admin/services/addservices' element={<AddService />} />
             <Route path='/admin/services/:id' element={<UpdateService />} />
           </Route>
+        </Route>
+        <Route path="/user" element={<UserLayout />}>
+          <Route index={true} element={<UserDashboard />} />
+          <Route path="/user/service-request" element={<ServiceRequest />} />
+          <Route path="/user/repairs" element={<Repairs />} />
         </Route>
       </Routes>
       <Footer />
