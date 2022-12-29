@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 export default function UserDashboard(){
     return(
         <div className="w-full">
-            <div className="text-left">
+            <div className="text-left ml-24">
                 <p className="text-5xl font-semibold">User</p>
             </div>
             <div className="flex flex-row justify-around my-5 mx-5">
