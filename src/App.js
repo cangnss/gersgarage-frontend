@@ -15,20 +15,20 @@ import ServicesLayout from './components/Admin/Services/ServicesLayout';
 import Services from './components/Admin/Services/Services';
 import AddService from './components/Admin/Services/AddService';
 import UpdateService from './components/Admin/Services/UpdateService';
-import Carousel from './layouts/Carousel/Carousel';
-import ServiceTypes from './layouts/ServiceTypes/ServiceTypes';
 import UserLayout from './components/User/UserLayout';
 import UserDashboard from './components/User/UserDashboard';
 import ServiceRequest from './components/User/ServiceRequest';
 import Repairs from './components/User/Repairs';
+import Home from './layouts/Home/Home';
+import About from './layouts/About/About';
 
 function App() {
   return (
     <div className="App flex flex-col">
       <Navbar />
-      <Carousel />
-      <ServiceTypes />
       <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route path="/auth/login" element={<Login />}/>
         <Route path="/auth/signup" element={<Signup />}/>
         <Route path="/contact" element={<Contact />} />

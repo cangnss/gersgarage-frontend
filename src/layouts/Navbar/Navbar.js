@@ -9,8 +9,12 @@ export default function Navbar(){
             </div>
             <div className="flex flex-row">
                 <ul className="flex flex-row">
-                    <li className="font-semibold mr-2 hover:text-gray-50">Home</li>
-                    <li className="font-semibold mr-2 hover:text-gray-50">About</li>
+                    <Link to="/">
+                        <li className="font-semibold mr-2 hover:text-gray-50">Home</li>
+                    </Link>
+                    <Link to="/about">
+                        <li className="font-semibold mr-2 hover:text-gray-50">About</li>
+                    </Link>
                     <Link to="/contact">
                         <li className="font-semibold mr-2 hover:text-gray-50">Contact</li>
                     </Link>
