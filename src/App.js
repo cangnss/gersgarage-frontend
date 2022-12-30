@@ -17,10 +17,11 @@ import AddService from './components/Admin/Services/AddService';
 import UpdateService from './components/Admin/Services/UpdateService';
 import UserLayout from './components/User/UserLayout';
 import UserDashboard from './components/User/UserDashboard';
-import ServiceRequest from './components/User/ServiceRequest';
+import AddVehicleFromUser from './components/User/AddVehicleFromUser';
 import Repairs from './components/User/Repairs';
 import Home from './layouts/Home/Home';
 import About from './layouts/About/About';
+import Vehicles from './components/User/Vehicles';
 
 function App() {
   return (
@@ -47,7 +48,8 @@ function App() {
         </Route>
         <Route path="/user" element={<UserLayout />}>
           <Route index={true} element={<UserDashboard />} />
-          <Route path="/user/service-request" element={<ServiceRequest />} />
+          <Route path="/user/service-request" element={<AddVehicleFromUser />} />
+          <Route path="/user/vehicles" element={<Vehicles />} />
           <Route path="/user/repairs" element={<Repairs />} />
         </Route>
       </Routes>

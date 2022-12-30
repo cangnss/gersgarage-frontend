@@ -21,3 +21,4 @@ export const getVehicle = (id) => api.get(`/vehicles/${id}`);
 export const postVehicle = (data) => api.post('/vehicles', data);
 export const putVehicle = (id, data) => api.put(`/vehicles/${id}`, data);
 export const deleteVehicle = (id) => api.get(`/vehicles/${id}`);
+export const getUserVehicles = (id) => api.get(`/vehicles/user/${id}`);

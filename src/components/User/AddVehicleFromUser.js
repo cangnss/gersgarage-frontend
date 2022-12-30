@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { postVehicle } from "../../service/api";
 
-export default function ServiceRequest() {
+export default function AddVehicleFromUser() {
   const [formData, setFormData] = useState({});
   const [notify, setNotify] = useState({})
 
@@ -24,6 +24,7 @@ export default function ServiceRequest() {
   return (
     <div className="w-full my-10">
       <div className="p-40 border-2 rounded-lg shadow-lg">
+        <h4 className="font-semibold text-3xl">Add Your Vehicle</h4>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
