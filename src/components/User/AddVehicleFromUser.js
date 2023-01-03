@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { postVehicle } from "../../service/api";
+import { useNavigate } from "react-router-dom";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 export default function AddVehicleFromUser() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
-  const [notify, setNotify] = useState({})
+  const [notify, setNotify] = useState({
+    status: 0,
+    message: "",
+  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -24,6 +30,12 @@ export default function AddVehicleFromUser() {
   return (
     <div className="w-full my-10">
       <div className="p-40 border-2 rounded-lg shadow-lg">
+        <AiOutlineArrowLeft
+          className="text-2xl"
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
         <h4 className="font-semibold text-3xl">Add Your Vehicle</h4>
         <form onSubmit={handleSubmit}>
           <input

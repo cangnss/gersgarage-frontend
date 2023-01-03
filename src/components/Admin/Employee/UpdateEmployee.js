@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getEmployee, putEmployeeData } from "../../../service/api";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 export default function UpdateEmployee() {
   const [formData, setFormData] = useState({
@@ -8,7 +9,7 @@ export default function UpdateEmployee() {
     lastname: "",
     salary: 0.0,
   });
-
+  const navigate = useNavigate();
   const params = useParams();
   const id = params?.id;
 
@@ -52,6 +53,12 @@ export default function UpdateEmployee() {
   return (
     <div className="w-full mt-10">
       <div className="mx-auto w-96 p-10 border-2 rounded-lg shadow-lg flex flex-col justify-center border-blue-600">
+        <AiOutlineArrowLeft
+          className="text-2xl"
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
         <form onSubmit={updateHandler}>
           <div className="flex flex-row">
             <div className="mt-1 flex flex-col">

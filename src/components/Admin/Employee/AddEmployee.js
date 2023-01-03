@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { postEmployeeData } from "../../../service/api";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 export default function AddEmployee() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
 
   const handleChange = (event) => {
@@ -19,10 +22,16 @@ export default function AddEmployee() {
         console.error(error);
       });
   };
-  console.log("formdata",formData);
+  console.log("formdata", formData);
   return (
     <div className="w-full mt-10">
       <div className="mx-auto w-96 p-10 border-2 rounded-lg shadow-lg flex flex-col justify-center border-blue-600">
+        <AiOutlineArrowLeft
+          className="text-2xl"
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
         <form onSubmit={handleSubmit}>
           <div className="flex flex-row">
             <div className="mt-1 flex flex-col">

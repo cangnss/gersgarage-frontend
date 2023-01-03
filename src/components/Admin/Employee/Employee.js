@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { deleteEmployeeData, getEmployeeData } from "../../../service/api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 export default function Employee() {
+  const navigate = useNavigate();
   const [employees, setEmployees] = useState(null);
   let i = 0;
 
@@ -18,13 +20,13 @@ export default function Employee() {
 
   const handleDelete = (id) => {
     deleteEmployeeData(id)
-          .then((res)=>{
-            console.log(res.data);
-            setEmployees(employees.filter((e)=> e.id !== id))
-          })
-          .catch((err)=>{
-            console.error(err);
-          })
+      .then((res) => {
+        console.log(res.data);
+        setEmployees(employees.filter((e) => e.id !== id));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   console.log(employees);
@@ -34,6 +36,12 @@ export default function Employee() {
         <div class="flex flex-col">
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+              <AiOutlineArrowLeft
+                className="text-2xl"
+                onClick={() => {
+                  navigate(-1);
+                }}
+              />
               <div class="overflow-hidden">
                 <table class="min-w-full">
                   <thead class="border-b">

@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { getUserVehicles } from "../../service/api";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 export default function Vehicles() {
+  const navigate = useNavigate();
   const [vehicles, setVehicles] = useState();
   const customer_id = 12;
   let i = 0;
@@ -18,6 +21,12 @@ export default function Vehicles() {
           <div class="flex flex-col">
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8 px-10">
               <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                <AiOutlineArrowLeft
+                  className="text-2xl"
+                  onClick={() => {
+                    navigate(-1);
+                  }}
+                />
                 <div class="overflow-hidden">
                   <table class="min-w-full">
                     <thead class="border-b">
