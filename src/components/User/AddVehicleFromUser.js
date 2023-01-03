@@ -39,7 +39,7 @@ export default function AddVehicleFromUser() {
               </label>
               <input
                 type="text"
-                name="vehicleBrand"
+                name="brand"
                 className="border-2 bg-gray-300 rounded-lg shadow-sm border-black"
                 defaultValue={formData?.brand || ""}
                 onChange={handleChange}
@@ -51,7 +51,7 @@ export default function AddVehicleFromUser() {
               </label>
               <input
                 type="text"
-                name="vehicleModel"
+                name="model"
                 className="border-2 bg-gray-300 rounded-lg shadow-sm border-black"
                 defaultValue={formData?.model || ""}
                 onChange={handleChange}
