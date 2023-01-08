@@ -11,23 +11,28 @@ export default function AddEmployee() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value, customerId: user.id, placeId: 1 });
+    setFormData({
+      ...formData,
+      [name]: value,
+      customerId: user.id,
+      placeId: 1,
+    });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    // postComments(formData)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
+    postComments(formData)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
   return (
     <div className="w-full">
-      <div className="border-2 shadow-lg rounded-lg">
+      <div className="mx-auto w-96 p-10 border-2 rounded-lg shadow-lg flex flex-col justify-center border-blue-600">
         <div class="flex flex-col">
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8 px-10">
             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -47,10 +52,14 @@ export default function AddEmployee() {
                       defaultValue={formData?.firstname || ""}
                       onChange={handleChange}
                     />
-                    <input type="text" name="placeId" value="1" />
                   </div>
                   <div>
-                    <button type="submit">Send Comment</button>
+                    <button
+                      type="submit"
+                      className="w-32 p-1 rounded-lg border-2 border-blue-600 bg-blue-600 text-white font-semibold"
+                    >
+                      Send Comment
+                    </button>
                   </div>
                 </form>
               </div>
