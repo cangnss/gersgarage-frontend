@@ -1,25 +1,12 @@
-import { useEffect, useState } from "react";
-import { getUserVehicles } from "../../service/api";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context";
+import { useAuth } from "../../../context";
 
-export default function Vehicles() {
-  const navigate = useNavigate();
-  const { user } = useAuth();
-  const [vehicles, setVehicles] = useState();
-  
-  let i = 0;
-  useEffect(() => {
-    getUserVehicles(user.id).then((res) => {
-      setVehicles(res.data);
-    });
-  }, []);
-
-  return (
-    <div>
-      <div className="w-full">
-        <div className="border-2 shadow-lg rounded-lg">
+export default function Comments(){
+    const navigate = useNavigate();
+    return(
+        <div className="w-full">
+        <div className="border-2 shadow-lg rounded-lg mt-10">
           <div class="flex flex-col">
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8 px-10">
               <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -78,7 +65,7 @@ export default function Vehicles() {
                       </tr>
                     </thead>
                     <tbody>
-                      {vehicles?.map((vehicle) => {
+                      {/* {vehicles?.map((vehicle) => {
                         return (
                           <tr class="border-b" key={vehicle.id}>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -104,7 +91,8 @@ export default function Vehicles() {
                             </td>
                           </tr>
                         );
-                      })}
+                      })} */}
+                      asdas
                     </tbody>
                   </table>
                 </div>
@@ -113,6 +101,5 @@ export default function Vehicles() {
           </div>
         </div>
       </div>
-    </div>
-  );
+    )
 }

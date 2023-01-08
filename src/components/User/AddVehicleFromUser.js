@@ -2,9 +2,12 @@ import { useState } from "react";
 import { postVehicle } from "../../service/api";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useAuth } from "../../context";
 
 export default function AddVehicleFromUser() {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const customerId = user?.id
   const [formData, setFormData] = useState({});
   const [notify, setNotify] = useState({
     status: 0,
@@ -27,6 +30,7 @@ export default function AddVehicleFromUser() {
       });
     console.log(formData);
   };
+  console.log(user);
   return (
     <div className="w-full my-10">
       <div className="p-40 border-2 rounded-lg shadow-lg">
@@ -41,8 +45,7 @@ export default function AddVehicleFromUser() {
           <input
             type="text"
             name="customerId"
-            defaultValue={formData?.customerId || ""}
-            onChange={handleChange}
+            defaultValue={customerId}
           />
           <div className="p-2">
             <div className="p-2">

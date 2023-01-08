@@ -24,7 +24,7 @@ export default function Navbar() {
             <li className="font-semibold mr-2 hover:text-gray-50">Home</li>
           </Link>
           {user ? (
-            <Link to="/userlayout">
+            <Link to="/user">
               <li className="font-semibold mr-2 hover:text-gray-50">
                 Services
               </li>

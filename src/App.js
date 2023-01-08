@@ -23,6 +23,10 @@ import Home from "./layouts/Home/Home";
 import About from "./layouts/About/About";
 import Vehicles from "./components/User/Vehicles";
 import { AuthProvider } from "./context";
+import ServiceRequest from "./components/User/ServiceRequest";
+import CommentsLayout from "./components/User/Comments/CommentsLayout";
+import Comments from "./components/User/Comments/Comments";
+import AddComment from './components/User/Comments/AddComment';
 
 function App() {
   return (
@@ -56,10 +60,12 @@ function App() {
           </Route>
           <Route path="/user" element={<UserLayout />}>
             <Route index={true} element={<UserDashboard />} />
-            <Route
-              path="/user/service-request"
-              element={<AddVehicleFromUser />}
-            />
+            <Route path="/user/add-vehicle" element={<AddVehicleFromUser />} />
+            <Route path="/user/service-request" element={<ServiceRequest />} />
+            <Route path="/user/comments" element={<CommentsLayout />}>
+              <Route index={true} element={<Comments />} />
+              <Route path="/user/comments/addcomment" element={<AddComment />} />
+             </Route>
             <Route path="/user/vehicles" element={<Vehicles />} />
             <Route path="/user/repairs" element={<Repairs />} />
           </Route>

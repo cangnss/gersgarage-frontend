@@ -25,3 +25,8 @@ export const getUserVehicles = (id) => api.get(`/vehicles/user/${id}`);
 
 export const register = (data) => api.post('/auth/register', data);
 export const login = (data) => api.post('/auth/authenticate', data);
+
+export const getStocks = () => api.get('/stocks');
+
+export const postComments = (data) => api.post('/comments', data);
+export const getUsersComments = (id) => api.get(`/comments/user/${id}`);

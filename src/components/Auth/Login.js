@@ -21,7 +21,7 @@ export default function Login() {
       })
       .then((data)=>{
         const token = data.token
-        const user = { id: data.id, firstname: data.firstname, lastname: data.lastname, username: data.username}
+        const user = { id: data.id, firstname: data.firstname, lastname: data.lastname, username: data.username, role: data.role}
         dispatch({
           type: "LOGIN_SUCCESS",
           payload: { user: user, token:token },
