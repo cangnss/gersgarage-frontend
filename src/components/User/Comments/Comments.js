@@ -1,9 +1,27 @@
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context";
+import { useEffect, useState } from "react";
+import { getUsersComments } from "../../../service/api";
 
 export default function Comments(){
     const navigate = useNavigate();
+    const { user } = useAuth();
+    const [comments, setComments] = useState()
+    let i = 0;
+
+    useEffect(()=>{
+        getUsersComments(user.id)
+            .then((res)=>{
+                console.log(res.data);
+                setComments(res.data);
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+    }, [])
+    
+
     return(
         <div className="w-full">
         <div className="border-2 shadow-lg rounded-lg mt-10">
@@ -30,69 +48,32 @@ export default function Comments(){
                           scope="col"
                           class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
                         >
-                          Brand
+                          Place Name
                         </th>
                         <th
                           scope="col"
                           class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
                         >
-                          Model
-                        </th>
-                        <th
-                          scope="col"
-                          class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
-                        >
-                          Km
-                        </th>
-                        <th
-                          scope="col"
-                          class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
-                        >
-                          Year
-                        </th>
-                        <th
-                          scope="col"
-                          class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
-                        >
-                          Type
-                        </th>
-                        <th
-                          scope="col"
-                          class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
-                        >
-                          Engine Type
+                          Comment
                         </th>
                       </tr>
                     </thead>
                     <tbody>
-                      {/* {vehicles?.map((vehicle) => {
+                      {comments?.map((comment) => {
                         return (
-                          <tr class="border-b" key={vehicle.id}>
+                          <tr class="border-b" key={comment.name}>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                               {++i}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              {vehicle.brand}
+                              {comment.name}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              {vehicle.model}
-                            </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              {vehicle.km}
-                            </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              {vehicle.v_year}
-                            </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              {vehicle.vehicleType}
-                            </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              {vehicle.vehicleEngineType}
+                              {comment.text}
                             </td>
                           </tr>
                         );
-                      })} */}
-                      asdas
+                      })}
                     </tbody>
                   </table>
                 </div>
