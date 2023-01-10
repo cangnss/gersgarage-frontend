@@ -49,7 +49,7 @@ export default function UserDashboard() {
           </div>
         </Link>
         <Link to="/user/comments">
-          <div className="p-20 mt-16 flex flex-col shadow-lg border-2 rounded-lg">
+          <div className="p-20 flex flex-col shadow-lg border-2 rounded-lg">
             <div className="flex justify-center">
               <GiAutoRepair className="text-6xl" />
             </div>

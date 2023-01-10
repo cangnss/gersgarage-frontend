@@ -3,11 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { postComments } from "../../../service/api";
 import { useAuth } from "../../../context";
+import Success from "../../Success"
+import Error from "../../Error"
 
 export default function AddEmployee() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
   const { user } = useAuth();
+
+  const [notify, setNotify] = useState({
+    success: false,
+    error: false,
+  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -22,8 +29,33 @@ export default function AddEmployee() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
+    if (
+      formData.text === "" &&
+      typeof formData.text === null &&
+      typeof formData.text === undefined
+    ) {
+      setNotify({
+        success: false,
+        error: true,
+        message: "Input is not correct. Please enter a correct value.",
+      });
+      setTimeout(() => {
+        setNotify({ error: false });
+      }, 3000);
+    }
     postComments(formData)
       .then((response) => {
+        console.log("added comment:", response);
+        if (response.status === 201) {
+          setNotify({
+            success: true,
+            error: false,
+            message: "New comment added.",
+          });
+          setTimeout(() => {
+            setNotify({ success: false });
+          }, 2000);
+        }
         console.log(response.data);
       })
       .catch((error) => {
@@ -32,6 +64,8 @@ export default function AddEmployee() {
   };
   return (
     <div className="w-full">
+      {notify.success ? <Success message={notify.message} /> : null}
+      {notify.error ? <Error message={notify.message} />: null}
       <div className="mx-auto w-96 p-10 border-2 rounded-lg shadow-lg flex flex-col justify-center border-blue-600">
         <div class="flex flex-col">
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8 px-10">
@@ -49,8 +83,9 @@ export default function AddEmployee() {
                       type="text"
                       className="w-48 h-10 border-2 border-slate-200 rounded-lg"
                       name="text"
-                      defaultValue={formData?.firstname || ""}
+                      defaultValue={formData?.text || ""}
                       onChange={handleChange}
+                      required
                     />
                   </div>
                   <div>
