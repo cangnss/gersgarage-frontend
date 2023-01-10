@@ -1,4 +1,4 @@
-export default function Error() {
+export default function Error(props) {
   return (
     <div className="text-center mx-auto w-96">
       <div
@@ -6,7 +6,7 @@ export default function Error() {
         role="alert"
       >
         <strong class="font-bold">Holy smokes!</strong>
-        <span class="block sm:inline">Something seriously bad happened.</span>
+        <span class="block sm:inline">{props.message}</span>
         <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
           <svg
             class="fill-current h-6 w-6 text-red-500"

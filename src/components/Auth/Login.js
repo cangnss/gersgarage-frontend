@@ -2,11 +2,19 @@ import { useState } from "react";
 import { login } from "../../service/api";
 import { useAuth } from "../../context";
 import { useNavigate } from "react-router-dom";
+import Success from "../../components/Success";
+import Error from "../../components/Error";
 
 export default function Login() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
   const { dispatch } = useAuth();
+
+  const [notify, setNotify] = useState({
+    success: false,
+    error: false,
+  });
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
@@ -16,25 +24,55 @@ export default function Login() {
     event.preventDefault();
     login(formData)
       .then((response) => {
+        console.log("login res:", response);
         console.log(response.data);
-        return response?.data
+        if (response.status === 200) {
+          setNotify({
+            success: true,
+            error: false,
+            message: "Successfully login. Navigate home page..",
+          });
+          setTimeout(() => {
+            setNotify({ success: false });
+          }, 1500);
+        }
+        return response?.data;
       })
-      .then((data)=>{
-        const token = data.token
-        const user = { id: data.id, firstname: data.firstname, lastname: data.lastname, username: data.username, role: data.role}
+      .then((data) => {
+        const token = data.token;
+        const user = {
+          id: data.id,
+          firstname: data.firstname,
+          lastname: data.lastname,
+          username: data.username,
+          role: data.role,
+        };
         dispatch({
           type: "LOGIN_SUCCESS",
-          payload: { user: user, token:token },
+          payload: { user: user, token: token },
         });
         navigate("/");
       })
       .catch((error) => {
-        console.error(error);
+        console.error('err',error);
+        if (error) {
+          setNotify({
+            success: false,
+            error: true,
+            message: "E-mail or password is not correct.",
+            alert: "success",
+          });
+          setTimeout(() => {
+            setNotify({ error: false });
+          }, 3000);
+        }
       });
   };
-  console.log("formdata:", formData)
+  console.log("formdata:", formData);
   return (
     <div className="w-full mt-10">
+      {notify.success ? <Success message={notify.message} /> : null}
+      {notify.error ? <Error message={notify.message} />: null}
       <div className="mx-auto w-96 p-10 border-2 rounded-lg shadow-lg flex flex-col justify-center border-blue-600">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-row">
@@ -68,7 +106,10 @@ export default function Login() {
             </div>
           </div>
           <div className="flex justify-end">
-            <button type="submit" className="w-32 p-1 rounded-lg border-2 border-blue-600 bg-blue-600 text-white font-semibold">
+            <button
+              type="submit"
+              className="w-32 p-1 rounded-lg border-2 border-blue-600 bg-blue-600 text-white font-semibold"
+            >
               Login
             </button>
           </div>

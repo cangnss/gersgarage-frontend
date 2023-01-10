@@ -1,4 +1,4 @@
-export default function Error() {
+export default function Error(props) {
   return (
     <div className="text-center mx-auto w-96">
       <div
@@ -16,10 +16,7 @@ export default function Error() {
             </svg>
           </div>
           <div>
-            <p class="font-bold">Our privacy policy has changed</p>
-            <p class="text-sm">
-              Make sure you know how these changes affect you.
-            </p>
+            <p class="font-bold">{props.message}</p>
           </div>
         </div>
       </div>
