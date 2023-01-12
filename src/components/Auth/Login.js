@@ -6,7 +6,12 @@ import Success from "../../components/Success";
 import Error from "../../components/Error";
 
 export default function Login() {
+  const { user } = useAuth();
+
   const navigate = useNavigate();
+  if (user) {
+    navigate("/");
+  }
   const [formData, setFormData] = useState({});
   const { dispatch } = useAuth();
 
@@ -54,7 +59,7 @@ export default function Login() {
         navigate("/");
       })
       .catch((error) => {
-        console.error('err',error);
+        console.error("err", error);
         if (error) {
           setNotify({
             success: false,
@@ -72,7 +77,7 @@ export default function Login() {
   return (
     <div className="w-full mt-10">
       {notify.success ? <Success message={notify.message} /> : null}
-      {notify.error ? <Error message={notify.message} />: null}
+      {notify.error ? <Error message={notify.message} /> : null}
       <div className="mx-auto w-96 p-10 border-2 rounded-lg shadow-lg flex flex-col justify-center border-blue-600">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-row">

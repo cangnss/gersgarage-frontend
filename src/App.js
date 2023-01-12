@@ -22,11 +22,12 @@ import Repairs from "./components/User/Repairs";
 import Home from "./layouts/Home/Home";
 import About from "./layouts/About/About";
 import Vehicles from "./components/User/Vehicles";
-import { AuthProvider } from "./context";
+import { AuthProvider, useAuth } from "./context";
 import ServiceRequest from "./components/User/ServiceRequest";
 import CommentsLayout from "./components/User/Comments/CommentsLayout";
 import Comments from "./components/User/Comments/Comments";
-import AddComment from './components/User/Comments/AddComment';
+import AddComment from "./components/User/Comments/AddComment";
+import VehiclesInService from "./components/Admin/Vehicles/VehiclesInService";
 
 function App() {
   return (
@@ -57,6 +58,10 @@ function App() {
               />
               <Route path="/admin/services/:id" element={<UpdateService />} />
             </Route>
+            <Route
+              path="/admin/vehicles-in-service"
+              element={<VehiclesInService />}
+            />
           </Route>
           <Route path="/user" element={<UserLayout />}>
             <Route index={true} element={<UserDashboard />} />
@@ -64,8 +69,11 @@ function App() {
             <Route path="/user/service-request" element={<ServiceRequest />} />
             <Route path="/user/comments" element={<CommentsLayout />}>
               <Route index={true} element={<Comments />} />
-              <Route path="/user/comments/addcomment" element={<AddComment />} />
-             </Route>
+              <Route
+                path="/user/comments/addcomment"
+                element={<AddComment />}
+              />
+            </Route>
             <Route path="/user/vehicles" element={<Vehicles />} />
             <Route path="/user/repairs" element={<Repairs />} />
           </Route>

@@ -30,3 +30,6 @@ export const getStocks = () => api.get('/stocks');
 
 export const postComments = (data) => api.post('/comments', data);
 export const getUsersComments = (id) => api.get(`/comments/user/${id}`);
+
+export const getSchedules = () => api.get('/schedules');
+export const postSchedules = (data) => api.post('/schedules', data);

@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { register } from "../../service/api";
+import { useAuth } from "../../context";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
+  const { user } = useAuth();
+  
+  const navigate = useNavigate();
+  if (user) {
+    navigate("/");
+  }
+
   const [formData, setFormData] = useState({});
 
   const handleChange = (event) => {
@@ -20,7 +29,7 @@ export default function Signup() {
       });
   };
 
-  console.log(formData)
+  console.log(formData);
   return (
     <div className="p-5 w-96 mx-auto mt-10 shadow-lg border-2 border-blue-600 rounded-lg">
       <div className="flex flex-row">
@@ -50,6 +59,7 @@ export default function Signup() {
                 name="firstname"
                 defaultValue={formData?.firstname || ""}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="mb-5">
@@ -59,6 +69,7 @@ export default function Signup() {
                 name="lastname"
                 defaultValue={formData?.lastname || ""}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="mb-5">
@@ -77,6 +88,7 @@ export default function Signup() {
                 name="email"
                 defaultValue={formData?.email || ""}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="mb-5">
@@ -86,6 +98,7 @@ export default function Signup() {
                 name="password"
                 defaultValue={formData?.password || ""}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>

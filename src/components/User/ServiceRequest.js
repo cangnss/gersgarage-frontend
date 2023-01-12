@@ -3,6 +3,7 @@ import {
   getPlaceServicesData,
   getStocks,
   getUserVehicles,
+  postSchedules,
 } from "../../service/api";
 import { useAuth } from "../../context";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +14,7 @@ export default function ServiceRequest() {
   const [stocks, setStocks] = useState();
   const [services, setServices] = useState();
   const [userVehicles, setUserVehicles] = useState();
+  const [formData, setFormData] = useState({});
 
   if (user == false) navigate("/auth/login");
 
@@ -40,7 +42,8 @@ export default function ServiceRequest() {
         console.log(err);
       });
   }, []);
-  const handleSubmit = () => {};
+
+
   console.log(
     "stocks:",
     stocks,
@@ -50,45 +53,37 @@ export default function ServiceRequest() {
     services
   );
 
-  const [item1, setItem1] = useState(0.0);
-  const [item2, setItem2] = useState(0.0);
-  const [sum, setSum] = useState(0.0);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value, customerId: user?.id, placeId: 1 });
+  };
 
-  function handleChange1(event) {
-    console.log("change1:", event.target.value);
-    const selectedItem = stocks.find((i) => i.item === event.target.value);
-    console.log("selectedItem price:",selectedItem.pcs_price);
-    setItem1(selectedItem?.pcs_price);
-    console.log("item1:", item1);
-    setSum((prevState) => {
-      console.log(prevState);
-    //   return parseFloat(prevState) + parseFloat(item1);
-    });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    postSchedules(formData)
+        .then((res)=>{
+          console.log(res);
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
   }
 
-  function handleChange2(event) {
-    const selectedItem = services.find(
-      (item) => item.type === event.target.value
-    );
-    setItem2(selectedItem.price);
-    setSum((prevState) => {
-      return parseFloat(prevState) + parseFloat(item2);
-    });
-  }
   return (
-    <div className="w-full my-10">
-      <div className="p-40 border-2 rounded-lg shadow-lg">
-        <div className="bg-slate-400">
+    <div className="text-center mx-auto p-14 my-10">
+      <div className="border-2 rounded-lg shadow-lg">
+        <div className="my-10">
           <form onSubmit={handleSubmit}>
             <div className="p-2">
               <div className="p-2">
                 <label className="p-1 font-semibold text-lg mr-8">
                   My Vehicle:
                 </label>
-                <select>
+                <select onChange={handleChange} name="vehicleId">
                   {userVehicles?.map((vehicle) => {
                     return (
-                      <option value={vehicle.brand}>
+                      <option value={vehicle.id}>
                         {vehicle.brand} {vehicle.model}
                       </option>
                     );
@@ -96,36 +91,41 @@ export default function ServiceRequest() {
                 </select>
               </div>
               <div className="p-2">
-                <label className="p-1 font-semibold text-lg mr-8">
-                  Ger's Garage Stocks:
-                </label>
-                <select onChange={handleChange1}>
-                  {stocks?.map((stock) => {
-                    return (
-                      <option value={stock.item}>
-                        {stock.item} - {stock.pcs_price}
-                      </option>
-                    );
-                  })}
-                </select>
+                  <label className="p-1 font-semibold text-lg mr-8">Description</label>
+                  <textarea name="description" onChange={handleChange}/>
+                </div>
+              <div className="p-2">
+                {/* <div className="p-2">
+                  <label className="p-1 font-semibold text-lg mr-8">
+                    Ger's Garage Stocks:
+                  </label>
+                  <select onChange={handleChange} name="place_service_type">
+                    {stocks?.map((stock) => {
+                      return (
+                        <option value={stock.pcs_price}>
+                          {stock.item} - {stock.pcs_price}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div> */}
                 <div className="p-2">
                   <label className="p-1 font-semibold text-lg mr-8">
                     Ger's Garage Services:
                   </label>
-                  <select onChange={handleChange2}>
+                  <select onChange={handleChange} name="place_service_type">
                     {services?.map((service) => {
                       return (
-                        <option value={service.type}>{service.type}</option>
+                        <option value={service.id} name="place_service_type">{service.type}</option>
                       );
                     })}
                   </select>
                 </div>
                 <div className="p-2">
                   <label className="p-1 font-semibold text-lg mr-8">Date</label>
-                  <input type="date" />
+                  <input type="date" name="bkDate" onChange={handleChange} />
                 </div>
               </div>
-              <p>Total: {sum}</p>
             </div>
             <div>
               <button className="border-2 bg-blue-600 shadow-lg p-2 rounded-lg border-blue-600 text-white font-semibold">
