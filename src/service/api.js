@@ -35,3 +35,5 @@ export const getActiveVehiclesSchedules = () => api.get('/schedules/activeVehicl
 export const getActiveVehicleInService = (id) => api.get(`/schedules/activeVehicles/${id}`);
 export const postSchedules = (data) => api.post('/schedules', data);
 export const putActiveVehicleStatus = (id, data) => api.put(`/schedules/activeVehicles/${id}`, data);
+
+export const getActiveUserVehiclesInService = (id) => api.get(`/customers/userVehiclesInService/${id}`);

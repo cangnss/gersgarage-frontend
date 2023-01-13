@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import { AuthProvider, useAuth } from "./context";
 import Navbar from "./layouts/Navbar/Navbar";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
@@ -22,14 +23,15 @@ import Repairs from "./components/User/Repairs";
 import Home from "./layouts/Home/Home";
 import About from "./layouts/About/About";
 import Vehicles from "./components/User/Vehicles";
-import { AuthProvider, useAuth } from "./context";
-import ServiceRequest from "./components/User/ServiceRequest";
+import ServiceRequest from "./components/User/VehicleService/ServiceRequest";
 import CommentsLayout from "./components/User/Comments/CommentsLayout";
 import Comments from "./components/User/Comments/Comments";
 import AddComment from "./components/User/Comments/AddComment";
 import VehiclesInService from "./components/Admin/Vehicles/VehiclesInService";
 import VehicleServiceLayout from "./components/Admin/Vehicles/VehicleServiceLayout";
 import UpdateVehicleService from "./components/Admin/Vehicles/UpdateVehicleService";
+import UserVehicleServiceLayout from "./components/User/VehicleService/UserVehicleServiceLayout";
+import UserVehiclesInService from "./components/User/VehicleService/UserVehiclesInService";
 
 function App() {
   return (
@@ -74,7 +76,16 @@ function App() {
           <Route path="/user" element={<UserLayout />}>
             <Route index={true} element={<UserDashboard />} />
             <Route path="/user/add-vehicle" element={<AddVehicleFromUser />} />
-            <Route path="/user/service-request" element={<ServiceRequest />} />
+            <Route
+              path="/user/service-request"
+              element={<UserVehicleServiceLayout />}
+            >
+              <Route index="true" element={<ServiceRequest />} />
+              <Route
+                path="/user/service-request/user-vehicles-in-service"
+                element={<UserVehiclesInService />}
+              />
+            </Route>
             <Route path="/user/comments" element={<CommentsLayout />}>
               <Route index={true} element={<Comments />} />
               <Route

@@ -2,21 +2,36 @@ import { useState } from "react";
 import { postEmployeeData } from "../../../service/api";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import Success from "../../Success";
 
 export default function AddEmployee() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
-
+  const [notify, setNotify] = useState({
+    success: false,
+    error: false,
+  });
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value, placeId: 1 });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     postEmployeeData(formData)
       .then((response) => {
-        console.log(response.data);
+        console.log(response);
+        if (response.status === 201) {
+          setNotify({
+            success: true,
+            error: false,
+            message: "New Employee Added!",
+          });
+          setTimeout(() => {
+            setNotify({ success: false });
+            navigate("/admin/employee");
+          }, 2000);
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -25,6 +40,7 @@ export default function AddEmployee() {
   console.log("formdata", formData);
   return (
     <div className="w-full mt-10">
+      {notify.success ? <Success message={notify.message} /> : null}
       <div className="mx-auto w-96 p-10 border-2 rounded-lg shadow-lg flex flex-col justify-center border-blue-600">
         <AiOutlineArrowLeft
           className="text-2xl"

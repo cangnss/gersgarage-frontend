@@ -4,12 +4,12 @@ import {
   getStocks,
   getUserVehicles,
   postSchedules,
-} from "../../service/api";
-import { useAuth } from "../../context";
+} from "../../../service/api";
+import { useAuth } from "../../../context";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import Success from "../Success";
-import Error from "../Error";
+import Success from "../../Success";
+import Error from "../../Error";
 
 export default function ServiceRequest() {
   const navigate = useNavigate();
@@ -108,9 +108,7 @@ export default function ServiceRequest() {
           <form onSubmit={handleSubmit}>
             <div className="p-2 flex flex-row justify-center mx-auto">
               <div className="flex flex-col text-left">
-                <label className="p-5 font-semibold text-lg">
-                  My Vehicle:
-                </label>
+                <label className="p-5 font-semibold text-lg">My Vehicle:</label>
                 <label className="p-5 font-semibold text-lg">
                   Description:
                 </label>
