@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
-  getActiveVehicleInService,
-  getPlaceServicesData,
   putActiveVehicleStatus,
 } from "../../../service/api";
 import { useNavigate } from "react-router-dom";

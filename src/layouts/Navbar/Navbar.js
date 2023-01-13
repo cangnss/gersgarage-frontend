@@ -23,10 +23,17 @@ export default function Navbar() {
           <Link to="/">
             <li className="font-semibold mr-2 hover:text-gray-50">Home</li>
           </Link>
-          {user ? (
+          {user?.role === "USER" ? (
             <Link to="/user">
               <li className="font-semibold mr-2 hover:text-gray-50">
                 Services
+              </li>
+            </Link>
+          ) : null}
+          {user?.role === "ADMIN" ? (
+            <Link to="/admin">
+              <li className="font-semibold mr-2 hover:text-gray-50">
+                Admin Services
               </li>
             </Link>
           ) : null}

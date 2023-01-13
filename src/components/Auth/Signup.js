@@ -22,7 +22,11 @@ export default function Signup() {
     event.preventDefault();
     register(formData)
       .then((response) => {
+        console.log(response);
         console.log(response.data);
+        if(response.status === 200){
+          navigate('/auth/login');
+        }
       })
       .catch((error) => {
         console.error(error);
