@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  putActiveVehicleStatus,
-} from "../../../service/api";
+import { putActiveVehicleStatus } from "../../../service/api";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import Success from "../../Success"
+import Success from "../../Success";
 import Error from "../../Error";
 
 export default function UpdateVehicleService() {
@@ -31,16 +29,16 @@ export default function UpdateVehicleService() {
       .then((response) => {
         console.log(response.data);
         if (response.status === 200) {
-            setNotify({
-              success: true,
-              error: false,
-              message: "Vehicle Status Updated!",
-            });
-            setTimeout(() => {
-              setNotify({ success: false });
-              navigate('/admin/vehicles-in-service')
-            }, 2000);
-          }
+          setNotify({
+            success: true,
+            error: false,
+            message: "Vehicle Status Updated!",
+          });
+          setTimeout(() => {
+            setNotify({ success: false });
+            navigate("/admin/vehicles-in-service");
+          }, 2000);
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -49,8 +47,8 @@ export default function UpdateVehicleService() {
 
   return (
     <div className="w-full mt-10">
-        {notify.success ? <Success message={notify.message} /> : null}
-      {notify.error ? <Error message={notify.message} />: null}
+      {notify.success ? <Success message={notify.message} /> : null}
+      {notify.error ? <Error message={notify.message} /> : null}
       <div className="mx-auto w-96 p-10 border-2 rounded-lg shadow-lg flex flex-col justify-center border-blue-600">
         <AiOutlineArrowLeft
           className="text-2xl"

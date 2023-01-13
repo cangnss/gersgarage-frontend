@@ -92,59 +92,62 @@ export default function ServiceRequest() {
   };
 
   return (
-    <div className="text-center mx-auto p-14 my-10">
+    <div className="mx-96 my-10">
       {notify.success ? <Success message={notify.message} /> : null}
       {notify.error ? <Error message={notify.message} /> : null}
-      <div className="border-2 rounded-lg shadow-lg">
-      <AiOutlineArrowLeft
-          className="text-2xl"
-          onClick={() => {
-            navigate(-1);
-          }}
-        />
+      <div className="border-2 rounded-lg shadow-lg text-center mx-auto">
+        <div className="mx-10 my-10">
+          <AiOutlineArrowLeft
+            className="text-2xl"
+            onClick={() => {
+              navigate(-1);
+            }}
+          />
+        </div>
         <div className="my-10">
           <form onSubmit={handleSubmit}>
-            <div className="p-2">
-              <div className="p-2">
-                <label className="p-1 font-semibold text-lg mr-8">
+            <div className="p-2 flex flex-row justify-center mx-auto">
+              <div className="flex flex-col text-left">
+                <label className="p-5 font-semibold text-lg">
                   My Vehicle:
                 </label>
-                <select onChange={handleChange} name="vehicleId">
-                  {userVehicles?.map((vehicle) => {
-                    return (
-                      <option value={vehicle.id}>
-                        {vehicle.brand} {vehicle.model}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-              <div className="p-2">
-                <label className="p-1 font-semibold text-lg mr-8">
-                  Description
+                <label className="p-5 font-semibold text-lg">
+                  Description:
                 </label>
-                <textarea name="description" onChange={handleChange} />
+                <label className="p-5 font-semibold text-lg mt-3">
+                  Ger's Garage Services:
+                </label>
+                <label className="p-5 font-semibold text-lg">Date:</label>
               </div>
-              <div className="p-2">
-                {/* <div className="p-2">
-                  <label className="p-1 font-semibold text-lg mr-8">
-                    Ger's Garage Stocks:
-                  </label>
-                  <select onChange={handleChange} name="place_service_type">
-                    {stocks?.map((stock) => {
+              <div className="p-2 flex flex-col text-left">
+                <div className="p-2">
+                  <select
+                    onChange={handleChange}
+                    name="vehicleId"
+                    className="border-2 rounded-lg w-56"
+                  >
+                    {userVehicles?.map((vehicle) => {
                       return (
-                        <option value={stock.pcs_price}>
-                          {stock.item} - {stock.pcs_price}
+                        <option value={vehicle.id}>
+                          {vehicle.brand} {vehicle.model}
                         </option>
                       );
                     })}
                   </select>
-                </div> */}
+                </div>
                 <div className="p-2">
-                  <label className="p-1 font-semibold text-lg mr-8">
-                    Ger's Garage Services:
-                  </label>
-                  <select onChange={handleChange} name="place_service_type">
+                  <textarea
+                    name="description"
+                    onChange={handleChange}
+                    className="border-2 rounded-lg w-56"
+                  />
+                </div>
+                <div className="p-2">
+                  <select
+                    onChange={handleChange}
+                    name="place_service_type"
+                    className="border-2 rounded-lg w-56"
+                  >
                     {services?.map((service) => {
                       return (
                         <option value={service.id} name="place_service_type">
@@ -155,8 +158,12 @@ export default function ServiceRequest() {
                   </select>
                 </div>
                 <div className="p-2">
-                  <label className="p-1 font-semibold text-lg mr-8">Date</label>
-                  <input type="date" name="bkDate" onChange={handleChange} />
+                  <input
+                    type="date"
+                    name="bkDate"
+                    onChange={handleChange}
+                    className="border-2 rounded-lg w-56"
+                  />
                 </div>
               </div>
             </div>
