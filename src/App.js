@@ -28,6 +28,8 @@ import CommentsLayout from "./components/User/Comments/CommentsLayout";
 import Comments from "./components/User/Comments/Comments";
 import AddComment from "./components/User/Comments/AddComment";
 import VehiclesInService from "./components/Admin/Vehicles/VehiclesInService";
+import VehicleServiceLayout from "./components/Admin/Vehicles/VehicleServiceLayout";
+import UpdateVehicleService from "./components/Admin/Vehicles/UpdateVehicleService";
 
 function App() {
   return (
@@ -60,8 +62,14 @@ function App() {
             </Route>
             <Route
               path="/admin/vehicles-in-service"
-              element={<VehiclesInService />}
-            />
+              element={<VehicleServiceLayout />}
+            >
+              <Route index={true} element={<VehiclesInService />} />
+              <Route
+                path="/admin/vehicles-in-service/:id"
+                element={<UpdateVehicleService />}
+              />
+            </Route>
           </Route>
           <Route path="/user" element={<UserLayout />}>
             <Route index={true} element={<UserDashboard />} />

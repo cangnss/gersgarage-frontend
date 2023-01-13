@@ -1,4 +1,4 @@
-export default function Error(props) {
+export default function Success(props) {
   return (
     <div className="text-center mx-auto w-96">
       <div

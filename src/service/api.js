@@ -31,5 +31,7 @@ export const getStocks = () => api.get('/stocks');
 export const postComments = (data) => api.post('/comments', data);
 export const getUsersComments = (id) => api.get(`/comments/user/${id}`);
 
-export const getSchedules = () => api.get('/schedules');
+export const getActiveVehiclesSchedules = () => api.get('/schedules/activeVehicles');
+export const getActiveVehicleInService = (id) => api.get(`/schedules/activeVehicles/${id}`);
 export const postSchedules = (data) => api.post('/schedules', data);
+export const putActiveVehicleStatus = (id, data) => api.put(`/schedules/activeVehicles/${id}`, data);
