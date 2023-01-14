@@ -3,9 +3,13 @@ import {
   deletePlaceServiceData,
   getPlaceServicesData,
 } from "../../../service/api";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context";
 
 export default function Services() {
+
+  const navigate = useNavigate();
+  const { user } = useAuth();
   let i = 0;
   const [services, setServices] = useState();
   useEffect(() => {
@@ -18,6 +22,12 @@ export default function Services() {
         console.log(err);
       });
   }, []);
+
+  if (user.role !== "ADMIN") {
+    return <Navigate to="/" />;
+  }
+
+
 
   const handleDelete = (id) => {
     deletePlaceServiceData(id)

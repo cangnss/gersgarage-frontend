@@ -6,7 +6,7 @@ import {
   postSchedules,
 } from "../../../service/api";
 import { useAuth } from "../../../context";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Success from "../../Success";
 import Error from "../../Error";
@@ -50,14 +50,9 @@ export default function ServiceRequest() {
       });
   }, []);
 
-  console.log(
-    "stocks:",
-    stocks,
-    "vehicles:",
-    userVehicles,
-    "services:",
-    services
-  );
+  if (user.role !== "USER") {
+    return <Navigate to="/" />;
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;

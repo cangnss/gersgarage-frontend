@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { postVehicle } from "../../service/api";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useAuth } from "../../context";
 import Success from "../Success";
@@ -14,7 +14,9 @@ export default function AddVehicleFromUser() {
     status: 0,
     message: "",
   });
-
+  if (user.role !== "USER") {
+    return <Navigate to="/" />;
+  }
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value, customerId: customerId });

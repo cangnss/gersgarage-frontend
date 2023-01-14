@@ -1,6 +1,11 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "../../../context";
 
 export default function UserVehicleServiceLayout() {
+  const { user } = useAuth();
+  if (user.role !== "USER") {
+    return <Navigate to="/" />;
+  }
   return (
     <div>
       <div>

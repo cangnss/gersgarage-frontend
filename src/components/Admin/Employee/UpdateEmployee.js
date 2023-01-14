@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getEmployee, putEmployeeData } from "../../../service/api";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useAuth } from "../../../context";
 
 export default function UpdateEmployee() {
   const [formData, setFormData] = useState({
@@ -10,6 +11,9 @@ export default function UpdateEmployee() {
     salary: 0.0,
   });
   const navigate = useNavigate();
+  const { user } = useAuth();
+
+  if (user.role !== "ADMIN") navigate("/auth/login");
   const params = useParams();
   const id = params?.id;
 

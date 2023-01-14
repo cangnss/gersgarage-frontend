@@ -1,8 +1,16 @@
+import { useEffect } from "react";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { GrServices, GrUserWorker } from "react-icons/gr";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context";
 
 export default function Admin() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  if (user.role !== "ADMIN") {
+    return <Navigate to="/auth/login" />;
+  }
+
   return (
     <div className="w-full">
       <div className="mx-24 my-5 border-2 rounded-lg shadow-lg">

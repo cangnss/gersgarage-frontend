@@ -5,7 +5,8 @@ import {
   putEmployeeData,
   putPlaceServiceData,
 } from "../../../service/api";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
+import { useAuth } from "../../../context";
 
 export default function UpdateService() {
   const params = useParams();
@@ -14,7 +15,7 @@ export default function UpdateService() {
     type: "",
     price: 0,
   });
-
+  const { user } = useAuth();
   useEffect(() => {
     getPlaceServiceData(id).then((res) => {
       setFormData({
@@ -23,6 +24,10 @@ export default function UpdateService() {
       });
     });
   }, []);
+
+  if (user.role !== "ADMIN") {
+    return <Navigate to="/" />;
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;

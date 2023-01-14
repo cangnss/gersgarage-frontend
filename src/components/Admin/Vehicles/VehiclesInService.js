@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { getActiveVehiclesSchedules } from "../../../service/api";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useAuth } from "../../../context";
 
 export default function VehiclesInService() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [activeVehicles, setActiveVehicles] = useState();
 
   let i = 0;
@@ -19,6 +21,11 @@ export default function VehiclesInService() {
         console.log(err);
       });
   }, []);
+
+  if (user.role !== "ADMIN") {
+    return <Navigate to="/" />;
+  }
+
   return (
     <div className="w-full">
       <div className="border-2 shadow-lg rounded-lg">
@@ -108,13 +115,20 @@ export default function VehiclesInService() {
                             {vehicle.km}
                           </td>
                           <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {(new Date(vehicle.bk_Date).getMonth() + 1 ) + ' - ' + new Date(vehicle.bk_Date).getDay() + ' - ' + new Date(vehicle.bk_Date).getFullYear()}
+                            {new Date(vehicle.bk_Date).getMonth() +
+                              1 +
+                              " - " +
+                              new Date(vehicle.bk_Date).getDay() +
+                              " - " +
+                              new Date(vehicle.bk_Date).getFullYear()}
                           </td>
                           <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                             {vehicle.vehicle_Status}
                           </td>
                           <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            <Link to={`/admin/vehicles-in-service/${vehicle.id}`}>
+                            <Link
+                              to={`/admin/vehicles-in-service/${vehicle.id}`}
+                            >
                               <button className="p-2 border-2 bg-sky-500 text-white font-semibold rounded-lg border-sky-500">
                                 Update Vehicle
                               </button>

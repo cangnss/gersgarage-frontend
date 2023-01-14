@@ -1,6 +1,11 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, Navigate } from "react-router-dom";
+import { useAuth } from "../../../context";
 
 export default function CommentsLayout() {
+  const { user } = useAuth();
+  if (user.role !== "USER") {
+    return <Navigate to="/" />;
+  }
   return (
     <div>
       <div className="flex flex-row justify-between">

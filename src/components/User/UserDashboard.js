@@ -1,7 +1,11 @@
 import { GiAutoRepair } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useAuth } from "../../context";
 export default function UserDashboard() {
-
+  const { user } = useAuth();
+  if (user.role !== "USER") {
+    return <Navigate to="/" />;
+  }
   return (
     <div className="w-full">
       <div className="text-left ml-24">

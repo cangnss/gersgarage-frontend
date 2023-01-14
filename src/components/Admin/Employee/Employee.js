@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { deleteEmployeeData, getEmployeeData } from "../../../service/api";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useAuth } from "../../../context";
 
 export default function Employee() {
   const navigate = useNavigate();
   const [employees, setEmployees] = useState(null);
   let i = 0;
 
+  const { user } = useAuth();
   useEffect(() => {
     getEmployeeData()
       .then((response) => {
@@ -17,6 +19,12 @@ export default function Employee() {
         console.error(error);
       });
   }, []);
+
+  if (user.role !== "ADMIN") {
+    return <Navigate to="/" />;
+  }
+
+
 
   const handleDelete = (id) => {
     deleteEmployeeData(id)

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { getActiveUserVehiclesInService } from "../../../service/api";
 import { useAuth } from "../../../context";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -20,6 +20,10 @@ export default function UserVehiclesInService() {
         console.log(err);
       });
   }, []);
+
+  if (user.role !== "USER") {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="w-full">

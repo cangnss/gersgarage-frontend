@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { postComments } from "../../../service/api";
 import { useAuth } from "../../../context";
@@ -15,6 +15,12 @@ export default function AddEmployee() {
     success: false,
     error: false,
   });
+
+
+  if (user.role !== "USER") {
+    return <Navigate to="/" />;
+  }
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;

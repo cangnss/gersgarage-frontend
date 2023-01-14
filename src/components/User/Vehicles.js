@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getUserVehicles } from "../../service/api";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context";
 
 export default function Vehicles() {
@@ -15,6 +15,9 @@ export default function Vehicles() {
       setVehicles(res.data);
     });
   }, []);
+  if (user.role !== "USER") {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div>

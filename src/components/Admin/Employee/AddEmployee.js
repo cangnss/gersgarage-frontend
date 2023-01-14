@@ -1,21 +1,24 @@
 import { useState } from "react";
 import { postEmployeeData } from "../../../service/api";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Success from "../../Success";
 import { useAuth } from "../../../context";
 
 export default function AddEmployee() {
-  const { user } = useAuth();
-
-  // if(user.role !== 'ADMIN') navigate('/auth/login');
-
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
   const [notify, setNotify] = useState({
     success: false,
     error: false,
   });
+  const { user } = useAuth();
+
+  if (user.role !== "ADMIN") {
+    return <Navigate to="/" />;
+  }
+
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value, placeId: 1 });

@@ -1,6 +1,14 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context";
 
 export default function ServicesLayout() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  if (user.role !== "ADMIN") {
+    return <Navigate to="/" />;
+  }
+
   return (
     <div>
       <div className="flex flex-column justify-between">

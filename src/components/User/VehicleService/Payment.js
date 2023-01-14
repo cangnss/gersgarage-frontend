@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Success from "../../Success";
 import {
   getPricePlaceService,
@@ -45,6 +45,10 @@ export default function Payment() {
         console.log(err);
       });
   }, [scheduleInfo?.price]);
+
+  if (user.role !== "USER") {
+    return <Navigate to="/" />;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();

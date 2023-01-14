@@ -32,6 +32,7 @@ import UpdateVehicleService from "./components/Admin/Vehicles/UpdateVehicleServi
 import UserVehicleServiceLayout from "./components/User/VehicleService/UserVehicleServiceLayout";
 import UserVehiclesInService from "./components/User/VehicleService/UserVehiclesInService";
 import Payment from "./components/User/VehicleService/Payment";
+import Page404 from "./layouts/Page404";
 
 function App() {
   return (
@@ -99,6 +100,7 @@ function App() {
             </Route>
             <Route path="/user/vehicles" element={<Vehicles />} />
           </Route>
+          <Route path="*" element={<Page404 />} />
         </Routes>
         <Footer />
       </AuthProvider>

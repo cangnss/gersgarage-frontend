@@ -3,7 +3,8 @@ import { postPlaceServiceData } from "../../../service/api";
 import Success from "../../Success";
 import Error from "../../Error";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context";
 
 export default function AddService() {
   const navigate = useNavigate();
@@ -16,6 +17,11 @@ export default function AddService() {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value, placeId: 1 });
   };
+  const { user } = useAuth();
+
+  if (user.role !== "ADMIN") {
+    return <Navigate to="/" />;
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,7 +36,7 @@ export default function AddService() {
           });
           setTimeout(() => {
             setNotify({ success: false });
-            navigate('/admin/services');
+            navigate("/admin/services");
           }, 2000);
         }
       })
@@ -40,7 +46,7 @@ export default function AddService() {
           setNotify({
             success: false,
             error: true,
-            message: "Something went wrong!"
+            message: "Something went wrong!",
           });
           setTimeout(() => {
             setNotify({ error: false });

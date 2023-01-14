@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { putActiveVehicleStatus } from "../../../service/api";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Success from "../../Success";
 import Error from "../../Error";
+import { useAuth } from "../../../context";
 
 export default function UpdateVehicleService() {
   const navigate = useNavigate();
+  const { user } = useAuth();
+
   const params = useParams();
   const scheduleId = params.id;
   const [formData, setFormData] = useState({});
@@ -16,6 +19,10 @@ export default function UpdateVehicleService() {
     error: false,
   });
   console.log(scheduleId);
+
+  if (user.role !== "ADMIN") {
+    return <Navigate to="/" />;
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
