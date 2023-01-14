@@ -23,8 +23,6 @@ export default function ServiceRequest() {
     error: false,
   });
 
-  if (user == false) navigate("/auth/login");
-
   if (user.role !== "USER") navigate("/auth/login");
 
   useEffect(() => {
