@@ -11,6 +11,7 @@ export default function reducer(state, action) {
       };
     case "LOGOUT":
       localStorage.removeItem("user");
+      localStorage.removeItem("token");
       return {
         ...state,
         user: null,
