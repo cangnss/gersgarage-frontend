@@ -37,3 +37,8 @@ export const postSchedules = (data) => api.post('/schedules', data);
 export const putActiveVehicleStatus = (id, data) => api.put(`/schedules/activeVehicles/${id}`, data);
 
 export const getActiveUserVehiclesInService = (id) => api.get(`/customers/userVehiclesInService/${id}`);
+
+export const getPricePlaceService = (id) => api.get(`/payments/${id}`);
+
+
+export const postUserVehiclePayment = (data) => api.post('/payments', data);

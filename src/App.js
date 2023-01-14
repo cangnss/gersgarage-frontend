@@ -19,7 +19,6 @@ import UpdateService from "./components/Admin/Services/UpdateService";
 import UserLayout from "./components/User/UserLayout";
 import UserDashboard from "./components/User/UserDashboard";
 import AddVehicleFromUser from "./components/User/AddVehicleFromUser";
-import Repairs from "./components/User/Repairs";
 import Home from "./layouts/Home/Home";
 import About from "./layouts/About/About";
 import Vehicles from "./components/User/Vehicles";
@@ -32,6 +31,7 @@ import VehicleServiceLayout from "./components/Admin/Vehicles/VehicleServiceLayo
 import UpdateVehicleService from "./components/Admin/Vehicles/UpdateVehicleService";
 import UserVehicleServiceLayout from "./components/User/VehicleService/UserVehicleServiceLayout";
 import UserVehiclesInService from "./components/User/VehicleService/UserVehiclesInService";
+import Payment from "./components/User/VehicleService/Payment";
 
 function App() {
   return (
@@ -85,6 +85,10 @@ function App() {
                 path="/user/service-request/user-vehicles-in-service"
                 element={<UserVehiclesInService />}
               />
+              <Route
+                path="/user/service-request/user-vehicles-in-service/:id"
+                element={<Payment />}
+              />
             </Route>
             <Route path="/user/comments" element={<CommentsLayout />}>
               <Route index={true} element={<Comments />} />
@@ -94,7 +98,6 @@ function App() {
               />
             </Route>
             <Route path="/user/vehicles" element={<Vehicles />} />
-            <Route path="/user/repairs" element={<Repairs />} />
           </Route>
         </Routes>
         <Footer />

@@ -3,8 +3,13 @@ import { postEmployeeData } from "../../../service/api";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Success from "../../Success";
+import { useAuth } from "../../../context";
 
 export default function AddEmployee() {
+  const { user } = useAuth();
+
+  // if(user.role !== 'ADMIN') navigate('/auth/login');
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
   const [notify, setNotify] = useState({

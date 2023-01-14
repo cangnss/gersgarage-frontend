@@ -112,19 +112,13 @@ export default function UserVehiclesInService() {
                             {vehicle.vehicle_Status}
                           </td>
                           <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {vehicle.status === "PAID" ? (
-                              <span className="p-2 border-2 bg-green-700 text-white font-semibold rounded-lg border-green-700">
-                                {vehicle.status}
-                              </span>
-                            ) : (
-                              <Link
-                                to={`/admin/vehicles-in-service/${vehicle.id}`}
-                              >
-                                <button className="p-2 border-2 bg-sky-500 text-white font-semibold rounded-lg border-sky-500">
-                                  Pay Invoice
-                                </button>
-                              </Link>
-                            )}
+                            <Link
+                              to={`/user/service-request/user-vehicles-in-service/${vehicle.id}`}
+                            >
+                              <button className="p-2 border-2 bg-sky-500 text-white font-semibold rounded-lg border-sky-500">
+                                Pay Invoice
+                              </button>
+                            </Link>
                           </td>
                         </tr>
                       );

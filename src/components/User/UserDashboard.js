@@ -38,16 +38,6 @@ export default function UserDashboard() {
             </div>
           </div>
         </Link>
-        <Link to="/user/repairs">
-          <div className="p-20 flex flex-col shadow-lg border-2 rounded-lg">
-            <div className="flex justify-center">
-              <GiAutoRepair className="text-6xl" />
-            </div>
-            <div>
-              <p className="text-xl font-semibold">My Repairs</p>
-            </div>
-          </div>
-        </Link>
         <Link to="/user/comments">
           <div className="p-20 flex flex-col shadow-lg border-2 rounded-lg">
             <div className="flex justify-center">

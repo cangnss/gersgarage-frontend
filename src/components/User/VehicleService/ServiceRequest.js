@@ -83,11 +83,22 @@ export default function ServiceRequest() {
           });
           setTimeout(() => {
             setNotify({ success: false });
+            navigate("/user/service-request/user-vehicles-in-service");
           }, 2000);
         }
       })
       .catch((err) => {
         console.log(err);
+        if (err.response.status === 400) {
+          setNotify({
+            success: false,
+            error: true,
+            message: "You cannot more same day. Please choose another day!",
+          });
+          setTimeout(() => {
+            setNotify({ success: false });
+          }, 2000);
+        }
       });
   };
 
@@ -124,6 +135,9 @@ export default function ServiceRequest() {
                     name="vehicleId"
                     className="border-2 rounded-lg w-56"
                   >
+                    <option value="" selected disabled hidden>
+                      Choose here
+                    </option>
                     {userVehicles?.map((vehicle) => {
                       return (
                         <option value={vehicle.id}>
@@ -146,6 +160,9 @@ export default function ServiceRequest() {
                     name="place_service_type"
                     className="border-2 rounded-lg w-56"
                   >
+                    <option value="" selected disabled hidden>
+                      Choose here
+                    </option>
                     {services?.map((service) => {
                       return (
                         <option value={service.id} name="place_service_type">
